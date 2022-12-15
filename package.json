@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/OttsWang/otts-utils/issues"
   },
-  "homepage": "https://github.com/OttsWang/otts-utils#readme"
+  "homepage": "https://github.com/OttsWang/otts-utils#readme",
+  "publishConfig": {
+    "@ottswang:utils": "https://npm.pkg.github.com"
+  }
 }
