@@ -1,0 +1,40 @@
+{
+    "compilerOptions": {
+        // 指定生成哪个模块系统代码
+        "module": "es2015",
+        // 编译的目标是什么版本的
+        "target": "es5",
+        // 是否默认禁用 any
+        "noImplicitAny": false,
+        // 是否移除注释
+        "removeComments": false,
+        // 是否生成map文件
+        "sourceMap": true,
+        // 是否自动创建类型声明文件
+        "declaration": true,
+        // 迭代器所有特性开启
+        "downlevelIteration": true,
+        // 编译过程中需要引入的库文件的列表
+        "lib": [
+            "es5",
+            "es2015",
+            "es2016",
+            "es2017",
+            "es2018",
+            "dom"
+        ],
+        // 类型声明文件的输出目录
+        "declarationDir": "dist/types",
+        // 输出目录
+        "outDir": "dist/lib",
+        "moduleResolution": "Node"
+    },
+    // 指定一个匹配列表（属于自动指定该路径下的所有ts相关文件）
+    "include": [
+        "src/**/*"
+    ],
+    // 指定一个排除列表
+    "exclude": [
+        "node_modules"
+    ]
+}

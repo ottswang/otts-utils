@@ -1,0 +1,9 @@
+/node_modules
+/test
+rollup.config.js
+tsconfig.json
+.gitignore
+.babelrc
+.browserslistrc
+/src
+/example

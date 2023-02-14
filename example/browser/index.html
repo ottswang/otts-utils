@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body style="height:1800px;">
+    <h2>滚动测试</h2>
+    <div id="scrollTest" style="height:300px;width:300px;background-color: orange;">scroll test</div>
+    <h2>图片压缩测试</h2>
+    <input type="file" name="file" id="imageCompressor" />
+    <script src="./index.umd.js"></script>
+    <script>
+        // MaybeUtils 是工具库全局导出的变量
+        console.log(MaybeUtils)
+        //#region 深拷贝
+        var a = { b: { val: 'test' } }
+        var c = MaybeUtils.deepClone(a)
+        console.log(c)
+        //#endregion
+
+        //#region 动态添加script
+        MaybeUtils.createScript('https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js', 'jq', 'async')
+        //#endregion
+
+        // #region 删除script
+        MaybeUtils.removeScript(document.getElementById('jq'))
+        // #endregion
+
+        //#region 按需滚动测试及是否进入视窗
+        document.addEventListener('scroll', MaybeUtils.throttle(function () {
+            console.log('滚动事件触发')
+            let scrollTest = document.getElementById('scrollTest');
+            console.log(MaybeUtils.isInViewPort(scrollTest) ? 'scrollTest进入视窗' : 'scrollTest离开视窗')
+        }, 1000, true))
+        //#endregion
+
+        //#region 是否在元素外面点击
+        document.addEventListener('click', function (e) {
+            console.log(MaybeUtils.isOutEl(e, document.getElementById('scrollTest')) ? '元素外' : '元素内')
+        })
+        //#endregion
+
+        //#region 数组去重
+        var arr = [1, 2, 2, 3, 3]
+        console.log(MaybeUtils.removeArrRepeat(arr))
+        //#endregion
+
+        //#region 将url的查询参数解析成对象
+        var url = "https://www.baidu.com/baidu?tn=monline_3_dg&ie=utf-8&wd=12306%E7%81%AB"
+        console.log(MaybeUtils.getQueryObject(url))
+        //#endregion
+
+        //#region  getTouchEventNameMap
+        console.log(MaybeUtils.getTouchEventNameMap())
+        //#endregion
+
+        //#region 图片压缩
+        // document.getElementById('image').onload = function (e) {
+        //     console.log('image loaded', e);
+        //     window.File
+        // }
+        const imagedom = document.getElementById('imageCompressor');
+        imagedom.onchange = function (e) {
+            const source = e.target.files[0];
+            MaybeUtils.fileCompressor(source, {
+                quality: 0.6
+            }).then(res => {
+                console.log('图片压缩成功:', res);
+            }).catch(res => {
+                console.error('图片压缩失败:', res);
+            });
+        }
+        const source = 'https://i.ibb.co/r0Y0ZB2/1.jpg';
+        MaybeUtils.fileCompressor(source, {
+            quality: 0.6
+        }).then(res => {
+            console.log('图片压缩成功:', res);
+        }).catch(res => {
+            console.error('图片压缩失败:', res);
+        });
+
+        //#endregion
+
+        //#region objToFormData
+        const obj = {
+            a: [1, 2, 3],
+            b: [1, 2, 3],
+            c: 2
+        }
+        MaybeUtils.objToFormData(obj).forEach((value, key) => {
+            console.log(`key ${key}: value ${value}`);
+        })
+       //#endregion
+    </script>
+</body>
+
+</html>
