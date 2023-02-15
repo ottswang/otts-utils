@@ -6,6 +6,7 @@
 // 导出全部函数
 export * from './setObj'
 export * from './defaultJudgeUndefined'
+export * from './getObj'
 export * from './rebuildTree'
 export * from './newClass'
 export * from './function'

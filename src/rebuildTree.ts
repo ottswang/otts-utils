@@ -13,7 +13,7 @@ export type TreeMapType = {
 };
 
 export const rebuildTree = <T>(
-    treeList: any[],
+    treeList: any,
     treeItemMap?: TreeMapType,
     treeItemClass?: any,
     maxLevel = -1,
