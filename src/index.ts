@@ -4,20 +4,12 @@
  * @license https://gitee.com/null_639_5368/js-utils
  */
 // 导出全部函数
-export * from './setObj'
-export * from './defaultJudgeUndefined'
+export * from './defaultTo'
+export * from './defaultToUndef'
 export * from './getObj'
-export * from './rebuildTree'
-export * from './newClass'
-export * from './function'
-export * from './array'
-export * from './event'
-export * from './form'
-export * from './navigator'
-export * from './page'
-export * from './script'
-export * from './storage'
-export * from './url'
-export * from './transform'
-
-
+export * from './getTreeItemPath'
+export * from './newArray'
+export * from './newObjArray'
+export * from './newTreeArray'
+export * from './setObj'
+export * from './sleep'

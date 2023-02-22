@@ -1,4 +1,4 @@
-import {mapType,setObj} from "./setObj";
+import {SetObjMapType,setObj} from "./setObj";
 import { assign } from "lodash-es";
 
 /**
@@ -8,12 +8,12 @@ import { assign } from "lodash-es";
  * @param extraObj 额外的对象最后会与生成的对象合并
  * @returns 最后生成的对象
  */
-export const getObj: (data: any, map: mapType, extraObj?: object) => any = (
+export const getObj: <T=any>(data: any, map: SetObjMapType, extraObj?: object) => T = (
   data,
   map,
   extraObj = {}
 ) => {
-  const obj = {};
+  const obj:any = {};
   setObj(obj, data, map, false);
   return assign(obj, extraObj);
 };

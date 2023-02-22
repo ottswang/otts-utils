@@ -1,6 +1,6 @@
 import { setWith, get, has } from "lodash-es";
-import { defaultJudgeUndefined } from "./defaultJudgeUndefined";
-export type mapValueType =
+import { defaultToUndef } from "./defaultToUndef";
+export type SetObjMapValueType =
   | string
   | {
       key: string | string[];
@@ -14,8 +14,8 @@ export type mapValueType =
       getValue: (val: any) => any;
       defaultValue?: any;
     };
-export type mapType = {
-  [key: string]: mapValueType;
+export type SetObjMapType = {
+  [key: string]: SetObjMapValueType;
 };
 
 
@@ -26,11 +26,11 @@ export type mapType = {
  * @param map 映射对象
  * @param strict 为true时是严格模式，obj的属性必须存在才能赋值
  */
-export const setObj: (obj: any, data: any, map: mapType, strict?: boolean) => void = (
+export const setObj: (obj: any, data: any, map: SetObjMapType, strict?: boolean) => void = (
   obj,
   data,
   map,
-  strict = true
+  strict = false
 ) => {
   for (const key in map) {
     try {
@@ -47,7 +47,7 @@ export const setObj: (obj: any, data: any, map: mapType, strict?: boolean) => vo
           : "";
         const value = hasKey ? get(data, dataKey, defaultValue) : data;
         result = has(map[key], "getValue")
-          ? defaultJudgeUndefined(
+          ? defaultToUndef(
             get(map[key], "getValue", (val: any) => val)(value),
             defaultValue,
             val => val === undefined
