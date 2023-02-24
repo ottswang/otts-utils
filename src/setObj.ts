@@ -3,17 +3,19 @@ import { defaultToUndef } from "./defaultToUndef";
 export type SetObjMapValueType =
   | string
   | {
-      key: string | string[];
-      defaultValue?: any;
-      getValue?: (val: any) => any;
-    }
+    key: string | string[];
+    active?: (val: any) => boolean;
+    defaultValue?: any;
+    getValue?: (val: any) => any;
+  }
   /**
    * 当不传key则val的值是data,此时必须有getValue函数
    */
   | {
-      getValue: (val: any) => any;
-      defaultValue?: any;
-    };
+    active?: (val: any) => boolean;
+    getValue: (val: any) => any;
+    defaultValue?: any;
+  };
 export type SetObjMapType = {
   [key: string]: SetObjMapValueType;
 };
@@ -41,11 +43,14 @@ export const setObj: (obj: any, data: any, map: SetObjMapType, strict?: boolean)
         result = get(data, dataKey, "");
       } else {
         const hasKey = has(map[key], "key");
-        dataKey = get(map[key], "key", false);
+        dataKey = get(map[key], "key");
         const defaultValue = has(map[key], "defaultValue")
           ? get(map[key], "defaultValue")
           : "";
         const value = hasKey ? get(data, dataKey, defaultValue) : data;
+        if(has(map[key], "active")&&!get(map[key], "active", () => true)(value)) {
+          throw key+" is not activated"
+        }
         result = has(map[key], "getValue")
           ? defaultToUndef(
             get(map[key], "getValue", (val: any) => val)(value),

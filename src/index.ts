@@ -6,6 +6,8 @@
 // 导出全部函数
 export * from './defaultTo'
 export * from './defaultToUndef'
+export * from './delArrItem'
+export * from './delObjArrItem'
 export * from './getObj'
 export * from './getTreeItemPath'
 export * from './newArray'
