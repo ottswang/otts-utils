@@ -13,7 +13,7 @@ export type TreeItemMapType = {
 
 export const newTreeArray:
     <T = TreeItem>(
-        treeList: any,
+        treeList: any[],
         treeItemMap?: TreeItemMapType,
         maxLevel?: number,
         level?: number

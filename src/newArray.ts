@@ -7,7 +7,7 @@ import {SetObjMapValueType} from "./setObj";
  * @param key 键值
  * @returns 构建完成后的数组
  */
-export const newArray: <T=any>(arr: any, mapValue: SetObjMapValueType) => T[] = (
+export const newArray: <T=any>(arr: any[], mapValue: SetObjMapValueType) => T[] = (
   arr,
   mapValue
 ) => {
