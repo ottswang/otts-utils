@@ -14,7 +14,8 @@ export const getObj: <T=any>(data: any, map: SetObjMapType, extraObj?: object) =
   extraObj = {}
 ) => {
   const obj:any = {};
+  assign(obj, extraObj)
   setObj(obj, data, map, false);
-  return assign(obj, extraObj);
+  return obj;
 };
 
