@@ -7,3 +7,6 @@ tsconfig.json
 .browserslistrc
 /src
 /example
+.vscode
+.idea
+/public
