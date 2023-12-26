@@ -1,6 +1,6 @@
 {
-  "name": "@dw-web-packages/utils",
-  "version": "0.0.13",
+  "name": "@otts/utils",
+  "version": "0.0.3",
   "description": "封装了常用的js工具函数，开箱即用",
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
@@ -12,7 +12,7 @@
     "test": "jest",
     "test-c": "jest --coverage"
   },
-  "author": "Maybe",
+  "author": "OttsWang",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.10.5",
