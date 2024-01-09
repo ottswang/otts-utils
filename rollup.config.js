@@ -25,13 +25,13 @@ export default {
     output: [
         {
             file: pkg.main,
-            name: 'MaybeUtils',
+            name: 'OttsUtils',
             sourcemap: false,
             format: 'umd',
         },
         {
             file: pkg.module,
-            name: 'MaybeUtils',
+            name: 'OttsUtils',
             sourcemap: false,
             format: 'esm'
         },
