@@ -1,60 +1,84 @@
 import { forEach, has } from "lodash-es";
 import { getObj } from "./getObj";
-import { SetObjMapValueType } from "./setObj";
-export interface TreeItem {
-  label: string;
-  value: any;
-  children: TreeItem[];
-}
+import { SetObjMapValueType, SetObjMapType } from "./setObj";
+import { SetObjMapValueKeyType, isSetObjMapValueKeyType } from "./private";
 
-export type TreeItemMapType = {
-  [key: string]: SetObjMapValueType;
+type TreeItemType<T> = {
+  children: Array<T>;
+  [key: string]: any;
 };
 
-export const newTreeArray: <T = TreeItem>(
-  treeList: any[],
-  treeItemMap?: TreeItemMapType,
-  maxLevel?: number,
-  level?: number
-) => T[] = (
-  treeList: any,
-  treeItemMap = {
-    label: "label",
-    value: "value",
-    children: "children",
-  },
-  maxLevel = -1,
-  level = 1
+export type TreeItem = {
+  label: string;
+  value: any;
+  children: Array<TreeItem>;
+};
+
+type TreeItemSetObjMapType<T extends TreeItemType<T>> =
+  | {
+      children: SetObjMapValueKeyType;
+    }
+  | ({
+      [K in keyof T]: K extends "children"
+        ? SetObjMapValueKeyType
+        : SetObjMapValueType<K, T>;
+    } & {
+      children: SetObjMapValueKeyType;
+    });
+
+const newTreeArrayByLevel = <T extends TreeItemType<T>>(
+  treeList: Array<any>,
+  treeItemMap: TreeItemSetObjMapType<T>,
+  maxLevel: number,
+  level: number
 ) => {
   try {
     if (maxLevel !== -1 && level > maxLevel) return [];
-    const childrenKey = has(treeItemMap, "children")
-      ? treeItemMap.children
-      : "children";
-    const childrenMapValue = {
-      key: childrenKey,
-      getValue: (val: any[]) => {
-        return newTreeArray(val, treeItemMap, maxLevel, level + 1);
+    const childrenKey =
+      has(treeItemMap, "children") &&
+      isSetObjMapValueKeyType(treeItemMap.children)
+        ? treeItemMap.children
+        : "children";
+    const itemMap: SetObjMapType<T> = {
+      ...(treeItemMap as SetObjMapType<T>),
+      children: {
+        key: childrenKey,
+        getValue: (val) =>
+          newTreeArrayByLevel<T>(val, treeItemMap, maxLevel, level + 1),
+        defaultValue: [],
       },
-      defaultValue: [],
     };
-    const itemMap = {
-      label: "label",
-      value: "value",
-      ...treeItemMap,
-      children: childrenMapValue,
-    };
-    const arr: any[] = [];
+    const arr: Array<T> = [];
     forEach(treeList, (e) => {
       const item = getObj(e, itemMap);
       if (
         has(item, "children") &&
-        (!item.children || item.children.length === 0)
-      )
+        (!Array.isArray(item.children) ||
+          (Array.isArray(item.children) && item.children.length === 0))
+      ) {
         delete item.children;
-      arr.push(item);
+      }
+      if (Object.keys(item).length > 0) {
+        arr.push(item);
+      }
     });
     return arr;
+  } catch (e) {
+    return [];
+  }
+};
+
+export const newTreeArray = <T extends TreeItemType<T> = TreeItem>(
+  treeList: Array<any>,
+  treeItemMap: TreeItemSetObjMapType<T> = {
+    label: "label",
+    value: "value",
+    children: "children",
+  },
+  maxLevel = -1
+) => {
+  try {
+    return newTreeArrayByLevel(treeList, treeItemMap, maxLevel, 1);
   } catch (e) {
     return [];
   }

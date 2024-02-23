@@ -4,10 +4,7 @@
  * @param sep 分隔符
  * @returns 格式化的数字
  */
-export const formatNumber: (num: string | number, sep?: string) => string = (
-  num,
-  sep = ", "
-) => {
+export const formatNumber = (num: string | number, sep = ", ") => {
   return num
     .toString()
     .replace(/\d+/, (n) => n.replace(/(\d)(?=(?:\d{3})+$)/g, `$1${sep}`));

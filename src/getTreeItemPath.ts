@@ -1,4 +1,5 @@
-import { get } from "lodash-es";
+import { get, cloneDeep } from "lodash-es";
+import { SetObjMapValueKeyType } from "./private";
 
 /**
  * @description 用于根据唯一id值获取树状数组的该id所在项的映射
@@ -6,42 +7,32 @@ import { get } from "lodash-es";
  * @param value 唯一id
  * @param vKey value键值
  * @param cKey children键值
- * @returns 如果存在返回由原item组成数组,没找到的话返回undefined
+ * @returns 如果存在返回由原item组成数组,没找到的话返回[]
  */
-export const getTreeItemPath: <T = any>(
-    treeList: any[],
-    value: any,
-    vKey?: string | string[],
-    cKey?: string | string[],
-) => T[] | undefined = (
-    treeList,
-    value,
-    vKey = "value",
-    cKey = "children",
+export const getTreeItemPath = <T = any>(
+  treeList: Array<T>,
+  value,
+  vKey: SetObjMapValueKeyType = "value",
+  cKey: SetObjMapValueKeyType = "children"
 ) => {
-        try {
-            for (let i = 0; i < treeList.length; i++) {
-                const e = treeList[i];
-                const val = get(e, vKey);
-                const children = get(e, cKey);
-                if (value === val) {
-                    return [e];
-                } else {
-                    if (children && children.length > 0) {
-                        const result = getTreeItemPath(
-                            children,
-                            value,
-                            vKey,
-                            cKey,
-                        );
-                        if (result !== undefined) {
-                            return [e, ...result];
-                        }
-                    }
-                }
-            }
-            return undefined;
-        } catch (error) {
-            return undefined;
+  try {
+    for (let i = 0; i < treeList.length; i++) {
+      const e = cloneDeep(treeList[i]);
+      const val = get(e, vKey);
+      const children: Array<T> = get(e, cKey);
+      if (value === val) {
+        return [e];
+      } else {
+        if (children && children.length > 0) {
+          const result: Array<T> = getTreeItemPath(children, value, vKey, cKey);
+          if (result.length > 0) {
+            return [e, ...result];
+          }
         }
-    };
+      }
+    }
+    return [];
+  } catch (e) {
+    return [];
+  }
+};

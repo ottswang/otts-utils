@@ -1,21 +1,23 @@
-import {SetObjMapType,setObj} from "./setObj";
+import { ExtraObjType, SetObjMapObjType } from "./private";
+import { SetObjMapType, setObj } from "./setObj";
 import { assign } from "lodash-es";
 
 /**
  * @description 通过映射一个对象中的属性生成一个新对象
  * @param data 被映射的对象
- * @param map 映射对象
- * @param extraObj 额外的对象最后会与生成的对象合并
+ * @param map 映射
+ * @param extraObj 额外的对象会与作为对象的初始值被合并
  * @returns 最后生成的对象
  */
-export const getObj: <T=any>(data: any, map: SetObjMapType, extraObj?: object) => T = (
+export const getObj = <T extends SetObjMapObjType = any>(
   data,
-  map,
-  extraObj = {}
+  map: SetObjMapType<T>,
+  extraObj: ExtraObjType<T> = {}
 ) => {
-  const obj:any = {};
-  assign(obj, extraObj)
-  setObj(obj, data, map, false);
-  return obj;
+  const obj = {};
+  if (typeof extraObj === "object") {
+    assign(obj, extraObj);
+  }
+  setObj<T>(obj as T, data, map, false);
+  return obj as T;
 };
-

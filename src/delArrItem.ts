@@ -1,10 +1,10 @@
 import { findIndex } from "lodash-es";
 
-export const delArrItem: (
-  arr: any[],
-  value: any,
-  judgeFunc?: (...data: any) => boolean
-) => void = (arr, value, judgeFunc = (e, val) => e === val) => {
+export const delArrItem = (
+  arr: Array<any>,
+  value,
+  judgeFunc: (e1, e2) => boolean = (e, val) => e === val
+) => {
   const index = findIndex(arr, (e) => judgeFunc(e, value));
   if (index !== -1) {
     arr.splice(index, 1);

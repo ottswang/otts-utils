@@ -1,23 +1,30 @@
-import { setWith, get, has } from "lodash-es";
+import { setWith, get, has, cloneDeep } from "lodash-es";
 import { defaultToUndef } from "./defaultToUndef";
-export type SetObjMapValueType =
-  | string
+import {
+  SetObjMapObjType,
+  SetObjMapValueKeyType,
+  isSetObjMapValueKeyType,
+} from "./private";
+
+export type SetObjMapValueType<K extends keyof T = any, T = any> =
+  | SetObjMapValueKeyType
   | {
-      key: string | string[];
-      active?: (val: any) => boolean;
-      defaultValue?: any;
-      getValue?: (val: any) => any;
+      key: SetObjMapValueKeyType;
+      active?: (val) => boolean;
+      getValue?: (val) => T[K];
+      defaultValue?: T[K];
     }
   /**
    * 当不传key则val的值是data,此时必须有getValue函数
    */
   | {
-      active?: (val: any) => boolean;
-      getValue: (val: any) => any;
-      defaultValue?: any;
+      active?: (val) => boolean;
+      getValue: (val) => T[K];
+      defaultValue?: T[K];
     };
-export type SetObjMapType = {
-  [key: string]: SetObjMapValueType;
+
+export type SetObjMapType<T extends SetObjMapObjType = any> = {
+  [K in keyof T]?: SetObjMapValueType<K, T>;
 };
 
 /**
@@ -27,41 +34,44 @@ export type SetObjMapType = {
  * @param map 映射对象
  * @param strict 为true时是严格模式，obj的属性必须存在才能赋值
  */
-export const setObj: (
-  obj: any,
-  data: any,
-  map: SetObjMapType,
-  strict?: boolean
-) => void = (obj, data, map, strict = false) => {
+export const setObj = <T extends SetObjMapObjType = any>(
+  obj: T,
+  data,
+  map: SetObjMapType<T>,
+  strict = false
+) => {
   for (const key in map) {
     try {
-      let dataKey: any = "";
       let result = "";
-      if (typeof map[key] === "string") {
-        dataKey = map[key];
-        result = get(data, dataKey, "");
+      const mapValue = map[key];
+      if (isSetObjMapValueKeyType(mapValue)) {
+        result = defaultToUndef(
+          get(data, mapValue as SetObjMapValueKeyType),
+          ""
+        );
       } else {
-        const hasKey = has(map[key], "key");
-        dataKey = get(map[key], "key");
-        const defaultValue = has(map[key], "defaultValue")
-          ? get(map[key], "defaultValue")
-          : "";
-        const value = hasKey ? get(data, dataKey, defaultValue) : data;
+        const dataKey = get(mapValue, "key");
+        const hasKey = has(mapValue, "key") && isSetObjMapValueKeyType(dataKey);
+        const defaultValue = has(mapValue, "defaultValue")
+          ? typeof get(mapValue, "defaultValue") === "object"
+            ? cloneDeep(get(mapValue, "defaultValue"))
+            : get(mapValue, "defaultValue")
+          : ""; // defaultValue类型为object时深拷贝
+        const value = hasKey ? get(data, dataKey) : data;
         if (
-          has(map[key], "active") &&
-          !get(map[key], "active", () => true)(value)
+          has(mapValue, "active") &&
+          !get(mapValue, "active", () => false)(value)
         ) {
           throw key + " is not activated";
         }
-        result = has(map[key], "getValue")
-          ? defaultToUndef(
-              get(map[key], "getValue", (val: any) => val)(value),
-              defaultValue,
-              (val) => val === undefined
-            )
-          : hasKey
-          ? value
-          : defaultValue;
+        if (has(mapValue, "getValue")) {
+          result = defaultToUndef(
+            get(mapValue, "getValue", (val) => val)(value),
+            defaultValue
+          );
+        } else {
+          result = defaultToUndef(hasKey ? value : defaultValue, defaultValue);
+        }
       }
       if (has(obj, key) || !strict) {
         setWith(obj, key, result, Object);
