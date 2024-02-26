@@ -97,7 +97,7 @@ export default defineComponent({
     interface MyTreeItem {
       label: any;
       value: number;
-      children: Array<MyTreeItem>;
+      children?: Array<MyTreeItem>;
     }
     console.log(
       newTreeArray<MyTreeItem>(

@@ -4,7 +4,7 @@ import { SetObjMapValueType, SetObjMapType } from "./setObj";
 import { SetObjMapValueKeyType, isSetObjMapValueKeyType } from "./private";
 
 type TreeItemType<T> = {
-  children: Array<T>;
+  children?: Array<T>;
   [key: string]: any;
 };
 
@@ -68,13 +68,9 @@ const newTreeArrayByLevel = <T extends TreeItemType<T>>(
   }
 };
 
-export const newTreeArray = <T extends TreeItemType<T> = TreeItem>(
+export const newTreeArray = <T extends TreeItemType<T>>(
   treeList: Array<any>,
-  treeItemMap: TreeItemSetObjMapType<T> = {
-    label: "label",
-    value: "value",
-    children: "children",
-  },
+  treeItemMap: TreeItemSetObjMapType<T>,
   maxLevel = -1
 ) => {
   try {

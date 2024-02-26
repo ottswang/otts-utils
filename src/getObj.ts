@@ -9,15 +9,18 @@ import { assign } from "lodash-es";
  * @param extraObj 额外的对象会与作为对象的初始值被合并
  * @returns 最后生成的对象
  */
-export const getObj = <T extends SetObjMapObjType = any>(
+export const getObj = <
+  T extends SetObjMapObjType = any,
+  K extends SetObjMapObjType = T
+>(
   data,
   map: SetObjMapType<T>,
-  extraObj: ExtraObjType<T> = {}
+  extraObj: ExtraObjType<K> = {}
 ) => {
   const obj = {};
   if (typeof extraObj === "object") {
     assign(obj, extraObj);
   }
   setObj<T>(obj as T, data, map, false);
-  return obj as T;
+  return obj as T & K;
 };

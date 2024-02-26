@@ -9,15 +9,18 @@ import { forEach } from "lodash-es";
  * @param extraObj 额外的对象最后会与生成的item对象合并
  * @returns 构建完成后的数组
  */
-export const newObjArray = <T extends SetObjMapObjType = any>(
+export const newObjArray = <
+  T extends SetObjMapObjType = any,
+  K extends SetObjMapObjType = T
+>(
   arr: Array<any>,
   map: SetObjMapType<T>,
-  extraObj: ExtraObjType<T> = {}
+  extraObj: ExtraObjType<K> = {}
 ) => {
   try {
-    const newArr: Array<T> = [];
+    const newArr: Array<T & K> = [];
     forEach(arr, (e) => {
-      newArr.push(getObj<T>(e, map, extraObj));
+      newArr.push(getObj<T, K>(e, map, extraObj));
     });
     return newArr;
   } catch (e) {
