@@ -11,16 +11,16 @@ import { assign } from "lodash-es";
  */
 export const getObj = <
   T extends SetObjMapObjType = any,
-  K extends SetObjMapObjType = T
+  U extends SetObjMapObjType = T
 >(
   data,
   map: SetObjMapType<T>,
-  extraObj: ExtraObjType<K> = {}
+  extraObj: ExtraObjType<U> = {}
 ) => {
   const obj = {};
   if (typeof extraObj === "object") {
     assign(obj, extraObj);
   }
-  setObj<T>(obj as T, data, map, false);
-  return obj as T & K;
+  setObj(obj as T, data, map, false);
+  return obj as T & U;
 };

@@ -11,16 +11,16 @@ import { forEach } from "lodash-es";
  */
 export const newObjArray = <
   T extends SetObjMapObjType = any,
-  K extends SetObjMapObjType = T
+  U extends SetObjMapObjType = T
 >(
   arr: Array<any>,
   map: SetObjMapType<T>,
-  extraObj: ExtraObjType<K> = {}
+  extraObj: ExtraObjType<U> = {}
 ) => {
   try {
-    const newArr: Array<T & K> = [];
+    const newArr: Array<T & U> = [];
     forEach(arr, (e) => {
-      newArr.push(getObj<T, K>(e, map, extraObj));
+      newArr.push(getObj<T, U>(e, map, extraObj));
     });
     return newArr;
   } catch (e) {

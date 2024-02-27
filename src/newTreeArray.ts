@@ -19,9 +19,9 @@ export type TreeItemSetObjMapType<T extends TreeItemType<T>> =
       children: SetObjMapValueKeyType;
     }
   | ({
-      [K in keyof T]: K extends "children"
+      [Key in keyof T]: Key extends "children"
         ? SetObjMapValueKeyType
-        : SetObjMapValueType<K, T>;
+        : SetObjMapValueType<Key, T>;
     } & {
       children: SetObjMapValueKeyType;
     });
@@ -68,17 +68,8 @@ const newTreeArrayByLevel = <T extends TreeItemType<T>>(
   }
 };
 
-export const newTreeArray = <
-  T extends TreeItemType<T> = TreeItem,
-  K extends TreeItemType<K> = T
->(
+export const newTreeArray = <T extends TreeItemType<T>>(
   treeList: Array<any>,
-  treeItemMap: TreeItemSetObjMapType<K>,
+  treeItemMap: TreeItemSetObjMapType<T>,
   maxLevel = -1
-) => {
-  try {
-    return newTreeArrayByLevel<T>(treeList, treeItemMap, maxLevel, 1);
-  } catch (e) {
-    return [];
-  }
-};
+) => newTreeArrayByLevel<T>(treeList, treeItemMap, maxLevel, 1);

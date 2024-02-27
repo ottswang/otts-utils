@@ -6,25 +6,25 @@ import {
   isSetObjMapValueKeyType,
 } from "./private";
 
-export type SetObjMapValueType<K extends keyof T = any, T = any> =
+export type SetObjMapValueType<Key extends keyof T = any, T = any> =
   | SetObjMapValueKeyType
   | {
       key: SetObjMapValueKeyType;
       active?: (val) => boolean;
-      getValue?: (val) => T[K];
-      defaultValue?: T[K];
+      getValue?: (val) => T[Key];
+      defaultValue?: T[Key];
     }
   /**
    * 当不传key则val的值是data,此时必须有getValue函数
    */
   | {
       active?: (val) => boolean;
-      getValue: (val) => T[K];
-      defaultValue?: T[K];
+      getValue: (val) => T[Key];
+      defaultValue?: T[Key];
     };
 
 export type SetObjMapType<T extends SetObjMapObjType = any> = {
-  [K in keyof T]?: SetObjMapValueType<K, T>;
+  [Key in keyof T]?: SetObjMapValueType<Key, T>;
 };
 
 /**

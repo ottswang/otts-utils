@@ -17,7 +17,7 @@ export function isSetObjMapValueKeyType(val) {
 export type SetObjMapObjType = Record<string, any>;
 
 export type ExtraObjType<T extends SetObjMapObjType> = {
-  [K in keyof T]?: T[K];
+  [Key in keyof T]?: T[Key];
 };
 
 export const defaultJudgeFunc = (val) =>
