@@ -46,3 +46,5 @@ export * from "./without";
 export * from "./subtract";
 export * from "./toLower";
 export * from "./trim";
+export * from "./differenceBy";
+export * from "./uniqBy";
