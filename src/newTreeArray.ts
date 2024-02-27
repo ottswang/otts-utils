@@ -11,10 +11,10 @@ type TreeItemType<T> = {
 export type TreeItem = {
   label: string;
   value: any;
-  children: Array<TreeItem>;
+  children?: Array<TreeItem>;
 };
 
-type TreeItemSetObjMapType<T extends TreeItemType<T>> =
+export type TreeItemSetObjMapType<T extends TreeItemType<T>> =
   | {
       children: SetObjMapValueKeyType;
     }
@@ -68,13 +68,16 @@ const newTreeArrayByLevel = <T extends TreeItemType<T>>(
   }
 };
 
-export const newTreeArray = <T extends TreeItemType<T>>(
+export const newTreeArray = <
+  T extends TreeItemType<T> = TreeItem,
+  K extends TreeItemType<K> = T
+>(
   treeList: Array<any>,
-  treeItemMap: TreeItemSetObjMapType<T>,
+  treeItemMap: TreeItemSetObjMapType<K>,
   maxLevel = -1
 ) => {
   try {
-    return newTreeArrayByLevel(treeList, treeItemMap, maxLevel, 1);
+    return newTreeArrayByLevel<T>(treeList, treeItemMap, maxLevel, 1);
   } catch (e) {
     return [];
   }
