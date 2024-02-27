@@ -43,3 +43,6 @@ export * from "./union";
 export * from "./unionBy";
 export * from "./uniq";
 export * from "./without";
+export * from "./subtract";
+export * from "./toLower";
+export * from "./trim";
