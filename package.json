@@ -1,6 +1,6 @@
 {
   "name": "@otts/utils",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "封装了常用的js工具函数，开箱即用",
   "sideEffects": false,
   "exports": {
@@ -45,6 +45,7 @@
     "@types/lodash-es": "^4.17.6",
     "babel-jest": "^27.0.6",
     "jest": "^26.6.0",
+    "lodash-es": ">=4.17.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.23.0",
     "rollup-plugin-livereload": "^2.0.0",
@@ -57,7 +58,6 @@
   "dependencies": {
     "@babel/runtime-corejs3": "^7.10.5",
     "compressorjs": "^1.1.1",
-    "lodash-es": ">=4.17.0",
     "object-to-formdata": "^4.1.0"
   }
 }
