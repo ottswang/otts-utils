@@ -1,63 +1,49 @@
 {
   "name": "@otts/utils",
-  "version": "0.0.21",
-  "description": "封装了常用的js工具函数，开箱即用",
+  "type": "module",
+  "version": "0.0.22",
+  "packageManager": "pnpm@7.15.0",
+  "license": "MIT",
   "sideEffects": false,
   "exports": {
     ".": {
       "import": {
-        "types": "./dist/types/index.d.ts",
-        "default": "./dist/index.es.js"
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
       },
       "require": {
-        "types": "./dist/types/index.d.ts",
-        "default": "./dist/index.umd.js"
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
       }
     }
   },
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.es.js",
-  "types": "./dist/types/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "dev": "npm run rmdist && rollup -c -w --environment NODE_ENV:development",
-    "build": "npm run rmdist && rollup -c --environment NODE_ENV:production",
-    "rmdist": "rimraf dist",
-    "test": "jest",
-    "test-c": "jest --coverage"
+    "build": "tsup src/index.ts --format cjs,esm --dts --no-splitting",
+    "lint": "eslint .",
+    "lint:fix": "nr lint --fix",
+    "release": "pnpm test && pnpm build && bumpp && npm publish"
   },
-  "author": "OttsWang",
-  "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.10.5",
-    "@babel/plugin-transform-runtime": "^7.10.5",
-    "@rollup/plugin-babel": "^5.1.0",
-    "@rollup/plugin-commonjs": "^14.0.0",
-    "@rollup/plugin-html": "^0.2.0",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^8.4.0",
-    "@rollup/plugin-replace": "^2.3.3",
-    "@rollup/plugin-typescript": "^5.0.2",
-    "@types/jest": "^26.0.14",
-    "@types/lodash": "^4.14.180",
-    "@types/lodash-es": "^4.17.6",
-    "babel-jest": "^27.0.6",
-    "jest": "^26.6.0",
-    "lodash-es": ">=4.17.0",
-    "rimraf": "^3.0.2",
-    "rollup": "^2.23.0",
-    "rollup-plugin-livereload": "^2.0.0",
-    "rollup-plugin-serve": "^1.0.4",
-    "rollup-plugin-terser": "^6.1.0",
-    "rollup-plugin-typescript2": "^0.27.1",
-    "ts-jest": "^26.4.1",
-    "typescript": "^3.9.7"
-  },
-  "dependencies": {
-    "@babel/runtime-corejs3": "^7.10.5",
-    "compressorjs": "^1.1.1",
-    "object-to-formdata": "^4.1.0"
+    "@antfu/eslint-config": "^0.43.1",
+    "@antfu/ni": "^0.21.10",
+    "@types/lodash": "^4.14.202",
+    "@types/lodash-es": "^4.17.12",
+    "@types/mocha": "^10.0.2",
+    "@types/node": "^18.18.4",
+    "@typescript-eslint/eslint-plugin": "^6.6.0",
+    "bumpp": "^9.2.0",
+    "eslint": "^8.51.0",
+    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
+    "publint": "^0.2.5",
+    "ts-node": "^10.9.1",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.2"
   }
 }

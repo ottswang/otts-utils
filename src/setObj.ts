@@ -57,10 +57,12 @@ export const setObj = <T extends SetObjMapObjType = any>(
             ? cloneDeep(get(mapValue, "defaultValue"))
             : get(mapValue, "defaultValue")
           : ""; // defaultValue类型为object时深拷贝
-        const value = hasKey ? get(data, dataKey) : data;
+        const value = hasKey
+          ? get(data, dataKey as SetObjMapValueKeyType)
+          : data;
         if (
           has(mapValue, "active") &&
-          !get(mapValue, "active", () => false)(value)
+          !get(mapValue as any, "active", () => false)(value)
         ) {
           throw key + " is not activated";
         }
