@@ -1,4 +1,4 @@
-import { forEach, has } from "lodash-es";
+import { forEach, has } from "lodash-unified";
 import { getObj } from "./getObj";
 import { SetObjMapValueType, SetObjMapType } from "./setObj";
 import { SetObjMapValueKeyType, isSetObjMapValueKeyType } from "./private";

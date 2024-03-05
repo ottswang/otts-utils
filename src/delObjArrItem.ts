@@ -1,4 +1,4 @@
-import { findIndex, get } from "lodash-es";
+import { findIndex, get } from "lodash-unified";
 import { SetObjMapValueKeyType } from "./private";
 
 export const delObjArrItem = (

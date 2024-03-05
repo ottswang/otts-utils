@@ -1,2 +1,2 @@
-import { trim as _trim } from "lodash-es";
+import { trim as _trim } from "lodash-unified";
 export const trim = _trim;

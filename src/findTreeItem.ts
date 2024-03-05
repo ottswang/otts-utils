@@ -1,4 +1,4 @@
-import { cloneDeep, get } from "lodash-es";
+import { cloneDeep, get } from "lodash-unified";
 import { SetObjMapValueKeyType } from "./private";
 
 /**

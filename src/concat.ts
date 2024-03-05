@@ -1,2 +1,2 @@
-import { concat as _concat } from "lodash-es";
+import { concat as _concat } from "lodash-unified";
 export const concat = _concat;

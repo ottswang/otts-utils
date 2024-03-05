@@ -1,2 +1,2 @@
-import { throttle as _throttle } from "lodash-es";
+import { throttle as _throttle } from "lodash-unified";
 export const throttle = _throttle;

@@ -1,2 +1,2 @@
-import { set as _set } from "lodash-es";
+import { set as _set } from "lodash-unified";
 export const set = _set;

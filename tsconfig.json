@@ -4,7 +4,7 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "baseUrl": ".",
-    "types": ["node", "@types/lodash-es","@types/lodash"],
+    "types": ["node", "@types/lodash-es", "@types/lodash"],
     "declaration": true,
     "allowSyntheticDefaultImports": true,
     "strict": false,

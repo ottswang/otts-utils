@@ -1,2 +1,2 @@
-import { last as _last } from "lodash-es";
+import { last as _last } from "lodash-unified";
 export const last = _last;

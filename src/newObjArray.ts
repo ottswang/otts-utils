@@ -1,7 +1,7 @@
 import { getObj } from "./getObj";
 import { ExtraObjType, SetObjMapObjType } from "./private";
 import { SetObjMapType } from "./setObj";
-import { forEach } from "lodash-es";
+import { forEach } from "lodash-unified";
 /**
  * @description 根据传入的数组和键值获取每个元素中的属性重新构建成一个新的数组
  * @param arr 数组

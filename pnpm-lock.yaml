@@ -12,6 +12,7 @@ specifiers:
   eslint: ^8.51.0
   lodash: ^4.17.21
   lodash-es: ^4.17.21
+  lodash-unified: ^1.0.3
   publint: ^0.2.5
   ts-node: ^10.9.1
   tsup: ^8.0.1
@@ -29,6 +30,7 @@ devDependencies:
   eslint: 8.57.0
   lodash: 4.17.21
   lodash-es: 4.17.21
+  lodash-unified: 1.0.3_vpgwo5v3ie2bia5ss74pgoa5ly
   publint: 0.2.7
   ts-node: 10.9.2_3a4cfumgbkbpgqwvswexy452im
   tsup: 8.0.2_scqxenvmgn24ljurjs2keb5hqa
@@ -2373,6 +2375,18 @@ packages:
 
   /lodash-es/4.17.21:
     resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+    dev: true
+
+  /lodash-unified/1.0.3_vpgwo5v3ie2bia5ss74pgoa5ly:
+    resolution: {integrity: sha512-WK9qSozxXOD7ZJQlpSqOT+om2ZfcT4yO+03FuzAHD0wF6S0l0090LRPDx3vhTTLZ8cFKpBn+IOcVXK6qOcIlfQ==}
+    peerDependencies:
+      '@types/lodash-es': '*'
+      lodash: '*'
+      lodash-es: '*'
+    dependencies:
+      '@types/lodash-es': 4.17.12
+      lodash: 4.17.21
+      lodash-es: 4.17.21
     dev: true
 
   /lodash.merge/4.6.2:

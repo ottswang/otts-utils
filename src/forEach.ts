@@ -1,2 +1,2 @@
-import { forEach as _forEach } from "lodash-es";
+import { forEach as _forEach } from "lodash-unified";
 export const forEach = _forEach;

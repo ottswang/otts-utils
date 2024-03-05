@@ -1,6 +1,6 @@
 import { ExtraObjType, SetObjMapObjType } from "./private";
 import { SetObjMapType, setObj } from "./setObj";
-import { assign } from "lodash-es";
+import { assign } from "lodash-unified";
 
 /**
  * @description 通过映射一个对象中的属性生成一个新对象

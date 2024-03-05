@@ -1,2 +1,2 @@
-import { union as _union } from "lodash-es";
+import { union as _union } from "lodash-unified";
 export const union = _union;
