@@ -1,0 +1,18 @@
+{
+  "extends": ["@antfu"],
+  "overrides": [
+    {
+      "files": [
+        "**/*.md/*.*"
+      ],
+      "rules": {
+        "@typescript-eslint/no-this-alias": "off",
+        "array-bracket-spacing": "off",
+        "n/handle-callback-err": "off",
+        "no-import-assign": "off",
+        "no-restricted-syntax": "off",
+        "no-labels": "off"
+      }
+    }
+  ]
+}
