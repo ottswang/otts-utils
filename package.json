@@ -1,7 +1,7 @@
 {
   "name": "@otts/utils",
   "type": "module",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "packageManager": "pnpm@7.15.0",
   "license": "MIT",
   "sideEffects": false,
@@ -32,7 +32,6 @@
   "devDependencies": {
     "@antfu/eslint-config": "^0.43.1",
     "@antfu/ni": "^0.21.10",
-    "@types/lodash": "^4.14.202",
     "@types/lodash-es": "^4.17.12",
     "@types/mocha": "^10.0.2",
     "@types/node": "^18.18.4",
@@ -46,5 +45,8 @@
     "ts-node": "^10.9.1",
     "tsup": "^8.0.1",
     "typescript": "^5.3.2"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.202"
   }
 }
