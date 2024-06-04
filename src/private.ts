@@ -22,3 +22,6 @@ export type ExtraObjType<T extends SetObjMapObjType> = {
 
 export const defaultJudgeFunc = (val) =>
   val === undefined || val === null || Number.isNaN(val) || val === "";
+
+type NativeType = null | number | string | boolean | symbol | Function;
+export type InferDefault<T> = (() => T & {}) | (T extends NativeType ? T : never);
