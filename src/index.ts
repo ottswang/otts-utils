@@ -25,6 +25,7 @@ export * from "./get";
 export * from "./groupBy";
 export * from "./has";
 export * from "./intersection";
+export * from "./intersectionBy";
 export * from "./intersectionWith";
 export * from "./isNumber";
 export * from "./join";
