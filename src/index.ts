@@ -51,3 +51,6 @@ export * from "./differenceBy";
 export * from "./uniqBy";
 export * from "./enums";
 export * from "./uniqWith";
+export * from "./xor";
+export * from "./xorBy";
+export * from "./xorWith";
