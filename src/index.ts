@@ -23,6 +23,7 @@ export * from "./findIndex";
 export * from "./forEach";
 export * from "./get";
 export * from "./groupBy";
+export * from "./guid";
 export * from "./has";
 export * from "./intersection";
 export * from "./intersectionBy";
